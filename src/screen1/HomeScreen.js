@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { connect } from 'react-redux';
 
 import { Header, Layout, ImageCard, SearhBar } from '../components/uikit';
 import { STARGATE_DETAILS } from '../routes';
 import { BLUE } from '../../constants';
+import {SearchChange} from '../actions'
 
 const url = 'http://api.tvmaze.com/search/shows?q=stargate';
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
   state = {
     title: 'STAR GATE',
     data: [],
@@ -84,3 +86,5 @@ export default class HomeScreen extends Component {
     );
   }
 }
+
+export default connect(null, {SearchChange})(HomeScreen)
