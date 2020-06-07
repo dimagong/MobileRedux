@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
+import { createStore, applyMiddleware, compose } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+//import { composeWithDevTools } from 'remote-redux-devtools';
 
-import ReduxThunk from 'redux-thunk'
-import {reducers} from './src/reducers'
+import ReduxThunk from 'redux-thunk';
+import reducer from './src/reducers'
 
 import { NavigationContainer } from '@react-navigation/native'
 import { createDrawerNavigator } from '@react-navigation/drawer'
@@ -15,13 +16,23 @@ import { STARGATE_HOME, BATMAN_HOME, SPIDER_HOME } from './src/routes'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { BLUE } from './constants'
 
-const store = createStore(reducers, composeWithDevTools(applyMiddleware(ReduxThunk)));
+//const store = createStore(reducers, composeWithDevTools(applyMiddleware(ReduxThunk)));
+
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const store = createStore(reducer, composeEnhancers(
+//   applyMiddleware(ReduxThunk)
+// ));
+const store = createStore(reducer, composeWithDevTools(
+  applyMiddleware(ReduxThunk)
+));
+
 
 const Drawer = createDrawerNavigator()
 
 class App extends Component {
   render() {
     console.log('App props', this.props);
+    console.log('STORE', store);
     return (
       <Provider store={store} >
         <NavigationContainer>

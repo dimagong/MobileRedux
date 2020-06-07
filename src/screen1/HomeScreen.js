@@ -30,17 +30,18 @@ class HomeScreen extends Component {
   };
 
   _onChangeText = (text) => {
-    console.log('onChangeText', this);
-    console.log('text', text);
-    this.setState({
-      value: text
-    })
+    //console.log('onChangeText', this);
+   // console.log('text', text);
+    // this.setState({
+    //   value: text
+    // })
+    this.props.SearchChange(text);
   }
 
   render() {
     const { title, data, visibleSearchBar } = this.state;
-    const { navigation } = this.props;
-    console.log('this.state.data', this.state.data);
+    const { navigation, movie } = this.props;
+    //console.log('this.state.data', this.state.data);
     console.log('this.props HomeScreen', this.props);
     return (
       <View>
@@ -51,7 +52,7 @@ class HomeScreen extends Component {
               iconRight='magnify'
               placeholder='Search'
               onChangeText={this._onChangeText}
-              value={this.value}
+              value={movie}
               onPressRigh={() => this.setState({visibleSearchBar: false} )}
               onBlur={() => {this.setState({visibleSearchBar: true});  console.log('onBlur') } }
             />
@@ -72,12 +73,7 @@ class HomeScreen extends Component {
                 data={item.show}
                 key={item.show.id}
                 onPress={() =>
-                  navigation.navigate(STARGATE_DETAILS, item.show
-                    //    {
-                    //   show: item.show,
-                    //   onGoBack: this.onGoBack,
-                    // }
-                  )
+                  navigation.navigate(STARGATE_DETAILS, item.show)
                 }
               />);
           })}
@@ -87,4 +83,10 @@ class HomeScreen extends Component {
   }
 }
 
-export default connect(null, {SearchChange})(HomeScreen)
+const mapStateToProps = state =>{
+  return {
+    movie: state.search.movie
+  }
+}
+
+export default connect(mapStateToProps, {SearchChange})(HomeScreen)
