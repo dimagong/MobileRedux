@@ -1,1 +1,3 @@
-export const SEARCH_CHANGE = 'SEARCH_CHANGE';
+export const SEARCH_CHANGE = 'SEARCH_CHANGE'
+export const MOVIES_FETCH = 'MOVIES_FETCH'
+export const MOVIES_FILED = 'MOVIES_FILED'

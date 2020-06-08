@@ -2,10 +2,11 @@ import React from 'react'
 import { TouchableOpacity, Image, View, Text, StyleSheet } from 'react-native'
 import { w } from '../../../constants'
 
+
 const ImageCard = ({ data, onPress}) => {
   const { container, sub, h1, cover } = styles
   const { image, name } = data
-  const img = `https${image.medium.slice(4)}`
+  const img = image === null ? 'https://mc.webpcache.epapr.in/mcms.php?size=large&in=https://mcmscache.epapr.in/post_images/website_350/post_15714343/thumb.jpg' : `https${image.medium.slice(4)}`
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={container}>
